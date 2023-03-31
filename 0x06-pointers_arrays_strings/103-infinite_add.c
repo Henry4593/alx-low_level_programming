@@ -1,4 +1,5 @@
 #include "main.h"
+#include <string.h>
 
 /**
  * infinite_add - adds two numbers
@@ -6,42 +7,46 @@
  * @n2: second number
  * @r: buffer for result
  * @size_r: buffer size
- *
- * Return: address of r or 0
  */
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
-	int i, j, k, l, m, n;
-
-	for (i = 0; n1[i]; i++)
-		;
-	for (j = 0; n2[j]; j++)
-		;
-	if (i > size_r || j > size_r)
-		return (0);
-	m = 0;
-	for (i -= 1, j -= 1, k = 0; k < size_r - 1; i--, j--, k++)
+	int carry = 0;
+	int len1 = strlen(n1);
+	int len2 = strlen(n2);
+        int max_len = (len1 > len2 ? len1 : len2);
+	if (max_len + 1 > size_r)
 	{
-		n = m;
-		if (i >= 0)
-			n += n1[i] - '0';
-		if (j >= 0)
-			n += n2[j] - '0';
-		if (i < 0 && j < 0 && n == 0)
+ 		/* Result can't be stored in r, return 0 */
+		return 0;
+	 }
+	r[max_len + 1] = '\0';
+   	int i = len1 - 1;
+	int j = len2 - 1;
+	int k = max_len;
+	while (i >= 0 || j >= 0) {
+		int sum = carry;
+		if (i >= 0) 
 		{
-			break;
+			sum += n1[i] - '0';
+			i--;
 		}
-		m = n / 10;
-		r[k] = n % 10 + '0';
-	}
-	r[k] = '\0';
-	if (i >= 0 || j >= 0 || m)
-		return (0);
-	for (k -= 1, l = 0; l < k; k--, l++)
-	{
-		m = r[k];
-		r[k] = r[l];
-		r[l] = m;
-	}
-	return (r);
+		if (j >= 0) 
+		{
+			sum += n2[j] - '0';
+			j--;
+		}
+			carry = sum / 10;
+			r[k] = sum % 10 + '0';
+			k--;
+		}
+
+   		if (carry > 0) 
+		{
+	   		r[k] = carry + '0';
+			return &r[k];
+		} 
+		else
+		{
+			return &r[k+1];
+		}
 }
