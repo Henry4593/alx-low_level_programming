@@ -14,15 +14,14 @@ char *_strpbrk(char *s, char *accept)
 
 	while (s[x] != '\0')/*iterates string s*/
 	{
-		for (y = 0; accept[y] != '\0'; y++) /* iterates target */
+		for (x = 0; s[x] != '\0'; x++)
 		{
-			if (s[x] == accept[y]) /* match found */
+			for (y = 0; accept[y] != '\0'; y++)
 			{
-				s = &s[x];
-				return (s);
+				if (s[x] == accept[y])
+					return (s + x);
 			}
-			x++;
 		}
 	}
-		return (NULL); /*no matches */
+	return (NULL);
 }
