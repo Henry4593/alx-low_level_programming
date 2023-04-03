@@ -10,8 +10,7 @@
 
 char *_strpbrk(char *s, char *accept)
 {
-	int x = 0;
-	int y;
+	int x = 0, y;
 
 	while (s[x] != '\0')/*iterates string s*/
 	{
@@ -24,5 +23,6 @@ char *_strpbrk(char *s, char *accept)
 			}
 			x++;
 		}
+	}
 		return (NULL); /*no matches */
 }
