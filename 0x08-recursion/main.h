@@ -14,4 +14,5 @@ int is_prime(int n, int x);
 int is_palindrome(char *s);
 int assert_palindrome(char *s, int length, int x);
 int wildcmp(char *s1, char *s2);
+int substr_match(char *s1, char *s2, char *after_spec_char);
 #endif
