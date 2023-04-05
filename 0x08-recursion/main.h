@@ -11,4 +11,7 @@ int get_root(int n, int root);
 int _sqrt_recursion(int n);
 int is_prime_number(int n);
 int is_prime(int n, int x);
+int is_palindrome(char *s);
+int assert_palindrome(char *s, int length, int x);
+int wildcmp(char *s1, char *s2);
 #endif
