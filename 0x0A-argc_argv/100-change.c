@@ -13,7 +13,7 @@
 
 int main(int argc, char *argv[])
 {
-	int i, cents, zero, cents_num, len, rem;
+	int i, cents, zero, cents_num, len;
 	int coin_values[] = {25, 10, 5, 2, 1};
 
 	if (argc != 2)
@@ -28,17 +28,18 @@ int main(int argc, char *argv[])
 		printf("%d\n", zero);
 		return (0);
 	}
-	else
-		cents = atoi(argv[1]);
-		i = 0;
-		cents_num = 0;
-		len = sizeof(coin_values) / sizeof(int);
 
-		for (i = 0; i < len; i++)
-		{
-			cents_num += cents / coin_values[i];
-			cents = cents % coin_values[i];
-		}
-		printf("%d\n", cents_num);
+	cents = atoi(argv[1]);
+	i = 0;
+
+	cents_num = 0;
+	len = sizeof(coin_values) / sizeof(int);
+
+	for (i = 0; i < len; i++)
+	{
+		cents_num += cents / coin_values[i];
+		cents = cents % coin_values[i];
+	}
+	printf("%d\n", cents_num);
 	return (0);
 }
