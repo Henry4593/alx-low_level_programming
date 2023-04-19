@@ -1,8 +1,0 @@
-#!/bin/bash
-echo "Enter file(s) to add: "
-read filed
-git add $filed
-echo "Enter commit message: "
-read message
-git commit -m "$message"
-git push
