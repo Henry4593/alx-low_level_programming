@@ -22,7 +22,5 @@ int main(void)
 					    add_nodeint_end(&head, 402);
 					        add_nodeint_end(&head, 1024);
 						    print_listint(head);
-						        free_listint(head);
-							    head = NULL;
-							        return (0);
+						        return (0);
 }
