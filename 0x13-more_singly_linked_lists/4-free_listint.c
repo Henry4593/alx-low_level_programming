@@ -2,22 +2,23 @@
 #include <stdlib.h>
 
 /**
- * free_listint - frees a listint list
+ * free_listint - frees memory of listint_t list
  *
- * @head: head of list to free
+ * @head: head of the linked list to free
  *
- * Return: void
+ * Return: nothing
  */
+
 void free_listint(listint_t *head)
 {
-	listint_t *next;
+	listint_t *next_node;
 
-	if (head == NULL)
+	if (!head)
 		return;
 
-	for (next = head->next; head != NULL; head = next)
+	for (next_node = head->next; head != NULL; head = next_node)
 	{
-		next = head->next;
+		next_node = head->next;
 		free(head);
 	}
 }
