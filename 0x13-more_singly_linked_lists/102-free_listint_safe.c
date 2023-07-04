@@ -2,59 +2,61 @@
 #include <stdlib.h>
 
 /**
- * find_listint_loop_fl - finds a loop in a linked list
+ * find_loop_listint_t_f - finds loop(s) in a linked list listint_t
  *
- * @head: linked list to search
+ * @head: linked list to traverse
  *
- * Return: address of node where loop starts/returns, NULL if no loop
+ * Return: address of the node where loop begins/returns, (NULL) NO loop
  */
-listint_t *find_listint_loop_fl(listint_t *head)
-{
-	listint_t *ptr, *end;
 
-	if (head == NULL)
+listint_t *find_loop_listint_t_f(listint_t *head)
+{
+	listint_t *ptr, *last_node;
+
+	if (!head)
 		return (NULL);
 
-	for (end = head->next; end != NULL; end = end->next)
+	for (last_node = head->next; last_node != NULL; last_node = last_node->next)
 	{
-		if (end == end->next)
-			return (end);
-		for (ptr = head; ptr != end; ptr = ptr->next)
-			if (ptr == end->next)
-				return (end->next);
+		if (last_node == last_node->next)
+			return (last_node);
+		for (ptr = head; ptr != last_node; ptr = ptr->next)
+			if (ptr == last_node->next)
+				return (last_node->next);
 	}
 	return (NULL);
 }
 
 /**
- * free_listint_safe - frees a listint list, even if it has a loop
+ * free_listint_safe - a function that safely frees a listint_t list.
  *
- * @h: head of list
+ * @h: head of the linked list
  *
- * Return: number of nodes freed
+ * Return: number of node(s) freed
  */
+
 size_t free_listint_safe(listint_t **h)
 {
-	listint_t *next, *loopnode;
-	size_t len;
+	listint_t *next, *looped_node;
+	size_t length;
 	int loop = 1;
 
-	if (h == NULL || *h == NULL)
+	if (!h || *h == NULL)
 		return (0);
 
-	loopnode = find_listint_loop_fl(*h);
-	for (len = 0; (*h != loopnode || loop) && *h != NULL; *h = next)
+	looped_node = find_loop_listint_t_f(*h);
+	for (length = 0; (*h != looped_node || loop) && *h != NULL; *h = next)
 	{
-		len++;
+		length++;
 		next = (*h)->next;
-		if (*h == loopnode && loop)
+		if (*h == looped_node && loop)
 		{
-			if (loopnode == loopnode->next)
+			if (looped_node == looped_node->next)
 			{
 				free(*h);
 				break;
 			}
-			len++;
+			length++;
 			next = next->next;
 			free((*h)->next);
 			loop = 0;
@@ -62,5 +64,5 @@ size_t free_listint_safe(listint_t **h)
 		free(*h);
 	}
 	*h = NULL;
-	return (len);
+	return (length);
 }
