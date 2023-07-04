@@ -2,46 +2,48 @@
 #include <stdlib.h>
 
 /**
- * reverse_recur - recursively reverses a listint list
+ * reverse_recursive - reverses the linked list using recursion
  *
- * @first: node to reverse
- * @second: node after node to reverse
+ * @first_node: node to reverse
+ * @second_node: node adjacent to the first node
  *
  * Return: void
  */
-listint_t *reverse_recur(listint_t *first, listint_t *second)
-{
-	listint_t *ptr, *prev = NULL;
 
-	ptr = first;
-	while (ptr->next != second)
+listint_t *reverse_recursive(listint_t *first_node, listint_t *second_node)
+{
+	listint_t *curr_node, *previous_node = NULL;
+
+	curr_node = first_node;
+	while (curr_node->next != second_node)
 	{
-		prev = ptr;
-		ptr = ptr->next;
+		previous_node = curr_node;
+		curr_node = curr_node->next;
 	}
 
-	if (prev != NULL)
-		prev->next = first;
-	second = first->next;
-	first->next = ptr->next;
-	if (first != ptr && second != first)
-		second = reverse_recur(second, first);
-	ptr->next = second;
-	return (ptr);
+	if (previous_node)
+		previous_node->next = first_node;
+	second_node = first_node->next;
+	first_node->next = curr_node->next;
+	if (first_node != curr_node && second_node != first_node)
+		second_node = reverse_recursive(second_node, first_node);
+	curr_node->next = second_node;
+	return (curr_node);
 }
 
 /**
- * reverse_listint - reverses a listint list
+ * reverse_listint - reverses listint_t list
  *
- * @head: list to reverse
+ * @head: linked list to reverse
  *
  * Return: new head of list
  */
+
 listint_t *reverse_listint(listint_t **head)
 {
-	if (head == NULL || *head == NULL)
+	if (!head || *head == NULL)
 		return (NULL);
 
-	*head = reverse_recur(*head, NULL);
+	*head = reverse_recursive(*head, NULL);
 	return (*head);
 }
