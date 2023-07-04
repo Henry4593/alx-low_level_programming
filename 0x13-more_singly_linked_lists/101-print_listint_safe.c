@@ -3,55 +3,57 @@
 #include <stdio.h>
 
 /**
- * find_listint_loop_pl - finds a loop in a linked list
+ * find_loop_listint_t - finds a loop in a linked list
  *
- * @head: linked list to search
+ * @head: linked list to traverse
  *
- * Return: address of node where loop starts/returns, NULL if no loop
+ * Return: address of the looped node, NULL on NO loop
  */
-listint_t *find_listint_loop_pl(listint_t *head)
-{
-	listint_t *ptr, *end;
 
-	if (head == NULL)
+listint_t *find_loop_listint_t(listint_t *head)
+{
+	listint_t *ptr, *last_node;
+
+	if (!head)
 		return (NULL);
 
-	for (end = head->next; end != NULL; end = end->next)
+	for (last_node = head->next; last_node != NULL; last_node = last_node->next)
 	{
-		if (end == end->next)
-			return (end);
-		for (ptr = head; ptr != end; ptr = ptr->next)
-			if (ptr == end->next)
-				return (end->next);
+		if (last_node == last_node->next)
+			return (last_node);
+		for (ptr = head; ptr != last_node; ptr = ptr->next)
+			if (ptr == last_node->next)
+				return (last_node->next);
 	}
 	return (NULL);
 }
 
 /**
- * print_listint_safe - prints a linked list, even if it
- * has a loop
+ * print_listint_safe - safely prints listint_t linked list
  *
- * @head: head of list to print
+ * @head: head of the linked list listint_t
  *
- * Return: number of nodes printed
+ * Return: number of nodes in the linked list
  */
+
 size_t print_listint_safe(const listint_t *head)
 {
-	size_t len = 0;
+	size_t length = 0;
 	int loop;
-	listint_t *loopnode;
+	listint_t *looped_node;
 
-	loopnode = find_listint_loop_pl((listint_t *) head);
+	looped_node = find_loop_listint_t((listint_t *) head);
 
-	for (len = 0, loop = 1; (head != loopnode || loop) && head != NULL; len++)
+	for (length = 0, loop = 1; (head != looped_node || loop) &&
+			head != NULL; length++)
 	{
 		printf("[%p] %d\n", (void *) head, head->n);
-		if (head == loopnode)
+		if (head == looped_node)
 			loop = 0;
 		head = head->next;
 	}
 
-	if (loopnode != NULL)
+	if (looped_node)
 		printf("-> [%p] %d\n", (void *) head, head->n);
-	return (len);
+	return (length);
 }
