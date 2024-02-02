@@ -3,8 +3,8 @@
 /**
  * hash_table_create - Creates a new hash table
  * @size: The size of the hash table array
- * 
- * Description: Allocates memory for a new hash table struct and 
+ *
+ * Description: Allocates memory for a new hash table struct and
  * array of pointers to nodes based on @size.
  * Initializes array to NULL values.
  * On failure to allocate memory, returns NULL.
