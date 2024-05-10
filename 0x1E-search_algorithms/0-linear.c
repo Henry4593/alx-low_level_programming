@@ -1,4 +1,5 @@
 #include "search_algos.h"
+
 /**
  * linear_search - Locates target value in integer array
  * @array: Pointer to array to search
@@ -20,5 +21,6 @@ int linear_search(int *array, size_t size, int value)
 		if (array[idx] == value)
 			return (idx);
 	}
+
 	return (-1);
 }
