@@ -1,11 +1,17 @@
 #include "search_algos.h"
 /**
- * binary_search - Locates target value in sorted integer array (Binary Search)
- * @array: Pointer to sorted array to search
- * @size: Number of elements in the array
- * @value: Target value to locate
+ * binary_search - Searches for a value in a sorted array using Binary Search.
+ * @array: Pointer to the sorted array to search.
+ * @size: Number of elements in the array.
+ * @value: Target value to search for.
  *
- * Return: Index of found value, or -1 if not found
+ * Return: The index of the first occurrence of the value in the search range,
+ *         or -1 if not found.
+ *
+ * Description: This function implements the Binary Search algorithm to find
+ * the first occurrence of a value in a sorted array. It repeatedly
+ * divides the search range in half until the target value is found
+ * or the search range becomes empty.
  */
 int binary_search(int *array, size_t size, int value)
 {
